@@ -59,10 +59,10 @@ const PostList = () => {
     },
     {
       title: 'Create Date',
-      dataIndex: 'created_at',
-      key: 'created_at',
-      sorter: (a, b) => new Date(a.created_at) - new Date(b.created_at),
-      render: (created_at) => moment(created_at).format('YYYY-MM-DD HH:mm:ss'),
+      dataIndex: 'createdAt',
+      key: 'createdAt',
+      sorter: (a, b) => new Date(a.createdAt) - new Date(b.createdAt),
+      render: (createdAt) => moment(createdAt).format('YYYY-MM-DD HH:mm:ss'),
     },
     {
       title: 'Actions',
