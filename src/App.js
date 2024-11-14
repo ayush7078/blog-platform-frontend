@@ -26,8 +26,8 @@ const AppContent = () => {
       <Layout.Content style={{ padding: '20px' }}>
         <Routes>
           <Route path="/" element={<PostList />} />
-          <Route path="/login" element={!user ||  user != null ? <Login /> : <Navigate to="/" />} />
-          <Route path="/register" element={!user || user != null ? <Register /> : <Navigate to="/" />} />
+          <Route path="/login" element={!user ||  user == null ? <Login /> : <Navigate to="/" />} />
+          <Route path="/register" element={!user || user == null ? <Register /> : <Navigate to="/" />} />
           <Route path="/edit-profile" element={user ? <EditProfile /> : <Navigate to="/login" />} />
         </Routes>
       </Layout.Content>
