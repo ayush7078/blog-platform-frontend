@@ -4,17 +4,18 @@ import { getPosts, removePost, searchPosts } from '../../redux/actions/postActio
 import { Button, Input, Table, Modal, Row, Col, Tag } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import PostForm from './PostForm';
+import moment from 'moment';
 
 const PostList = () => {
   const dispatch = useDispatch();
   const { posts } = useSelector((state) => state.posts);
-  const authData = useSelector((state) => state.auth.user); // Updated to match the current structure
+  const authData = useSelector((state) => state.auth.user);
   const [searchQuery, setSearchQuery] = useState('');
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [currentPost, setCurrentPost] = useState(null);
 
   useEffect(() => {
-    dispatch(getPosts()); // Fetch posts on component mount
+    dispatch(getPosts());
   }, [dispatch]);
 
   const handleSearch = () => {
@@ -57,23 +58,30 @@ const PostList = () => {
       ),
     },
     {
+      title: 'Create Date',
+      dataIndex: 'created_at',
+      key: 'created_at',
+      sorter: (a, b) => new Date(a.created_at) - new Date(b.created_at),
+      render: (created_at) => moment(created_at).format('YYYY-MM-DD HH:mm:ss'),
+    },
+    {
       title: 'Actions',
       key: 'actions',
       render: (_, record) => {
-        const isAuthor = authData && authData.id === record.author._id; // Check if current user is the author
+        const isAuthor = authData && authData.id === record.author._id;
         return (
           <>
             <Button
               type="link"
               icon={<EditOutlined />}
-              disabled={!authData || !isAuthor} // Disable if not logged in or not the author
+              disabled={!authData || !isAuthor}
               onClick={() => handleEdit(record)}
             />
             <Button
               type="link"
               icon={<DeleteOutlined />}
               danger
-              disabled={!authData || !isAuthor} // Disable if not logged in or not the author
+              disabled={!authData || !isAuthor}
               onClick={() => dispatch(removePost(record._id))}
             />
           </>
