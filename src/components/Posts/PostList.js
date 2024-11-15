@@ -14,24 +14,29 @@ const PostList = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [currentPost, setCurrentPost] = useState(null);
 
+  // Fetch all posts when the component mounts
   useEffect(() => {
     dispatch(getPosts());
   }, [dispatch]);
 
+  // Function to handle search by title or tags
   const handleSearch = () => {
     dispatch(searchPosts(searchQuery));
   };
 
+  // Function to handle editing a post (set the current post to edit)
   const handleEdit = (post) => {
     setCurrentPost(post);
     setIsModalVisible(true);
   };
 
+  // Function to close the modal
   const handleModalClose = () => {
     setIsModalVisible(false);
     setCurrentPost(null);
   };
 
+    // Define the columns for the posts table
   const columns = [
     {
       title: 'Title',

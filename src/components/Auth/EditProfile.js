@@ -10,9 +10,9 @@ const EditProfile = () => {
   const { authData } = useSelector((state) => state.auth);
   const [form] = Form.useForm();
 
+  // function to edit the Profile  
   const handleEditProfile = (values) => {
     dispatch(editProfile(values, authData.token)); // Pass token for authentication
-    // You can optionally redirect or show a success message
     history.push('/profile'); // Redirect to the profile page after successful edit
   };
 
